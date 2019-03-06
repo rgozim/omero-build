@@ -11,23 +11,20 @@ pipeline {
         JAVA_HOME = '/usr/lib/jvm/jre-1.8.0-openjdk'
 
         // Default credentials for testing on devspace
-        ARTIFACTORY_URL = 'http://nexus:8081/nexus/repository/maven-internal/'
-        ARTIFACTORY_USER = 'admin'
-        ARTIFACTORY_PASSWORD = 'admin123'
-
-        // Fetch artifacts from this repository
-        MVN_REPOSITORY_URL = 'http://nexus:8081/nexus/repository/maven-internal/'
+        MAVEN_SNAPSHOTS_REPO_URL = 'http://nexus:8081/nexus/repository/maven-internal/'
+        MAVEN_USER = 'admin'
+        MAVEN_PASSWORD = 'admin123'
     }
 
     stages {
         stage('Build') {
             steps {
-                sh 'gradle publishToMavenLocal'
+                sh 'gradle --init-script init-ci.gradle publishToMavenLocal'
             }
         }
         stage('Deploy') {
             steps {
-                sh 'gradle publish'
+                sh 'gradle --init-script init-ci.gradle publish'
             }
         }
     }
