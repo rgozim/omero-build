@@ -1,7 +1,41 @@
+import com.google.common.base.CaseFormat
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath "com.google.guava:guava:27.1-jre"
+    }
+}
+
+task publishBinaryToMavenLocal {
+    group "omero"
+    description "Calls publish\${projet.name}BinaryPublicationToMavenLocal on all subprojects"
+    dependsOn gradle.includedBuilds.collect {
+        it.task(":publish${camelCaseName(it)}BinaryPublicationToMavenLocal")
+    }
+}
+
+task publishBinaryAndSourcesToMavenLocal {
+    group "omero"
+    description "Calls publish\${projet.name}BinaryAndSourcesPublicationToMavenLocal on all subprojects"
+    dependsOn gradle.includedBuilds.collect {
+        it.task(":publish${camelCaseName(it)}BinaryAndSourcesPublicationToMavenLocal")
+    }
+}
+
 task publishToMavenLocal {
     group "omero"
     description "Calls publishToMavenLocal on all subprojects"
     dependsOn gradle.includedBuilds*.task(':publishToMavenLocal')
+}
+
+task publish {
+    group "omero"
+    description "Calls publish on all subprojects"
+    dependsOn gradle.includedBuilds*.task(':publish')
 }
 
 task clean {
@@ -22,3 +56,6 @@ task javadoc {
     dependsOn gradle.includedBuilds*.task(':javadoc')
 }
 
+String camelCaseName(IncludedBuild ib) {
+    CaseFormat.LOWER_HYPHEN.to(CaseFormat.LOWER_CAMEL, ib.name).capitalize()
+}
