@@ -1,3 +1,7 @@
+[submodule "omero-model"]
+	path = omero-model
+	url = https://github.com/rgozim/omero-model.git
+	branch = develop
 [submodule "omero-common"]
 	path = omero-common
 	url = https://github.com/rgozim/omero-common.git
