@@ -1,8 +1,6 @@
-image: gradle:5.4.0-jdk8
+image: gradle:5.4.1-jdk8
 
 before_script:
-  - apt-key adv --keyserver keyserver.ubuntu.com --recv 5E6DA83306132997
-  - apt-add-repository "deb http://zeroc.com/download/Ice/3.6/ubuntu16.04 stable main"
   - apt-get update -qq && apt-get install -y -qq zeroc-ice-all-dev zeroc-ice-all-runtime
   - export GRADLE_USER_HOME=`pwd`/.gradle
 
