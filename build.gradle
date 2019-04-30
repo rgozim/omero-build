@@ -38,6 +38,12 @@ task publish {
     dependsOn gradle.includedBuilds*.task(':publish')
 }
 
+task assemble {
+    group "omero"
+    description "Calls assemble on all subprojects"
+    dependsOn gradle.includedBuilds*.task(':assemble')
+}
+
 task clean {
     group "omero"
     description "Calls clean on all subprojects"
