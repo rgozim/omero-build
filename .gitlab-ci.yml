@@ -1,9 +1,7 @@
 image: gradle:5.4.1-jdk8
 
 before_script:
-  - USER root
   - apt-get update -qq && apt-get install -y -qq zeroc-ice-all-dev zeroc-ice-all-runtime
-  - USER gradle
   - export GRADLE_USER_HOME=`pwd`/.gradle
 
 cache:
