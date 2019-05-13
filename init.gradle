@@ -2,10 +2,14 @@ settingsEvaluated { settings ->
     settings.pluginManagement {
         resolutionStrategy {}
         repositories {
-            mavenLocal()
             gradlePluginPortal()
             maven { url "https://gitlab.com/api/v4/projects/11093498/packages/maven" }
-            maven { url "https://artifacts.openmicroscopy.org/artifactory/maven/" }
         }
+    }
+}
+
+allprojects {
+    repositories {
+        maven { url "https://gitlab.com/api/v4/projects/11093498/packages/maven" }
     }
 }
