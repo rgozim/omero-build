@@ -29,7 +29,6 @@ publish:
   stage: publish
   image: $CI_REGISTRY_IMAGE:custom-gradle
   script:
-    - env
     - gradle publishToGitlab -i
   only:
     - develop
