@@ -10,7 +10,6 @@ settingsEvaluated { settings ->
                 name "gitlab"
                 url "https://gitlab.com/api/v4/projects/11093498/packages/maven"
             }
-            gradlePluginPortal()
         }
     }
 }
