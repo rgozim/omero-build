@@ -3,6 +3,9 @@
 #
 FROM gradle:5.4.1-jdk8
 
+# Disable interaction from isntalling zeroc-ice-all-runtime
+ENV DEBIAN_FRONTEND=noninteractive
+
 RUN apt-get update && apt-get install -y -qq zeroc-ice-all-dev zeroc-ice-all-runtime
 
 # Copy init.gradle to .gradle/init.d
