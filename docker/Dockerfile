@@ -8,7 +8,5 @@ RUN apt-get update && apt-get install -y -qq zeroc-ice-all-dev zeroc-ice-all-run
 # Copy init.gradle to .gradle/init.d
 COPY --chown=gradle:gradle ./init.gradle /home/gradle/.gradle/init.d/
 
-# Copy test build.gradle
-#COPY --chown=gradle:gradle ./docker/build.gradle /home/
-
+# For running local
 CMD ["/bin/bash"]

@@ -1,11 +1,22 @@
+// init.gradle
 
-// The pluginManagement {} block may only appear in either the settings.gradle file,
-// where it must be the first block in the file, or in an Initialization Script.
-// https://docs.gradle.org/current/userguide/plugins.html
+/**
+ *  The pluginManagement {} block may only appear in either the settings.gradle file,
+ *  where it must be the first block in the file, or in an Initialization Script.
+ *  https://docs.gradle.org/current/userguide/plugins.html
+ */
 settingsEvaluated { settings ->
     settings.pluginManagement {
         resolutionStrategy {}
         repositories {
+            // Remove openmicroscopy artifactory repos
+            all { ArtifactRepository repo ->
+                if (!(repo instanceof MavenArtifactRepository) ||
+                        repo.url.toString().contains("artifacts.openmicroscopy.org")) {
+                    remove repo
+                }
+            }
+
             maven {
                 name "gitlab"
                 url "https://gitlab.com/api/v4/projects/11093498/packages/maven"
@@ -16,6 +27,15 @@ settingsEvaluated { settings ->
 
 allprojects {
     repositories {
+        // Remove openmicroscopy artifactory repos
+        all { ArtifactRepository repo ->
+            if (!(repo instanceof MavenArtifactRepository) ||
+                    repo.url.toString().contains("artifacts.openmicroscopy.org")) {
+                project.logger.lifecycle "Repository ${repo.url} removed."
+                remove repo
+            }
+        }
+
         maven {
             name "gitlab"
             url "https://gitlab.com/api/v4/projects/11093498/packages/maven"
