@@ -1,24 +1,24 @@
+image: $DOCKER_IMAGE
+
 stages:
-  - docker
   - build
   - publish
 
-docker:
-  stage: docker
-  image: docker:stable
-  services:
-    - docker:dind
-  variables:
-    DOCKER_HOST: tcp://docker:2375
-    DOCKER_DRIVER: overlay2
-  script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-    - docker build -t $CI_REGISTRY_IMAGE:custom-gradle -f docker/Dockerfile .
-    - docker push $CI_REGISTRY_IMAGE:custom-gradle
+#docker:
+#  stage: docker
+#  image: docker:stable
+#  services:
+#    - docker:dind
+#  variables:
+#    DOCKER_HOST: tcp://docker:2375
+#    DOCKER_DRIVER: overlay2
+#  script:
+#    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+#    - docker build -t $CI_REGISTRY_IMAGE:custom-gradle -f docker/Dockerfile .
+#    - docker push $CI_REGISTRY_IMAGE:custom-gradle
 
 build:
   stage: build
-  image: $CI_REGISTRY_IMAGE:custom-gradle
   script:
     - gradle assemble -i
   artifacts:
@@ -27,7 +27,6 @@ build:
 
 publish:
   stage: publish
-  image: $CI_REGISTRY_IMAGE:custom-gradle
   script:
     - gradle publishToGitlab -i
   only:
