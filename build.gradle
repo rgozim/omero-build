@@ -10,12 +10,10 @@ buildscript {
     }
 }
 
-task publishBinaryToMavenLocal {
+task publishToGitlab {
     group "omero"
-    description "Calls publish\${projet.name}BinaryPublicationToMavenLocal on all subprojects"
-    dependsOn gradle.includedBuilds.collect {
-        it.task(":publish${camelCaseName(it)}BinaryPublicationToMavenLocal")
-    }
+    description "Calls publishAllPublicationsToGitlabRepository on all subprojects"
+    dependsOn gradle.includedBuilds*.task(':publishAllPublicationsToGitlabRepository')
 }
 
 task publishBinaryAndSourcesToMavenLocal {
