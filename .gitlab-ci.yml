@@ -1,6 +1,7 @@
 image: $DOCKER_IMAGE
 
 stages:
+  - tasks
   - build
   - publish
 
@@ -16,6 +17,11 @@ stages:
 #    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
 #    - docker build -t $CI_REGISTRY_IMAGE:custom-gradle -f docker/Dockerfile .
 #    - docker push $CI_REGISTRY_IMAGE:custom-gradle
+
+tasks:
+  stage: tasks
+  script:
+    - gradle tasks -i
 
 build:
   stage: build
