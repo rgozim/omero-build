@@ -6,3 +6,16 @@ includeBuild "omero-romio"
 includeBuild "omero-renderer"
 includeBuild "omero-server"
 includeBuild "omero-blitz"
+
+// Replace buildscript in build.gradle
+gradle.rootProject {
+    buildscript {
+        repositories {
+            mavenCentral()
+        }
+
+        dependencies {
+            classpath "com.google.guava:guava:27.1-jre"
+        }
+    }
+}

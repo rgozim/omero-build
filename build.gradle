@@ -1,19 +1,11 @@
 import com.google.common.base.CaseFormat
 
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-
-    dependencies {
-        classpath "com.google.guava:guava:27.1-jre"
-    }
-}
-
-task publishToGitlab {
+task publishBinaryAndSourcesToGitlabRepository {
     group "omero"
-    description "Calls publishAllPublicationsToGitlabRepository on all subprojects"
-    dependsOn gradle.includedBuilds*.task(':publishAllPublicationsToGitlabRepository')
+    description "Calls publish\${projet.name}BinaryAndSourcesPublicationToGitlabRepository on all subprojects"
+    dependsOn gradle.includedBuilds.collect {
+        it.task(":publish${camelCaseName(it)}BinaryAndSourcesPublicationToGitlabRepository")
+    }
 }
 
 task publishBinaryAndSourcesToMavenLocal {
