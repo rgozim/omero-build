@@ -28,6 +28,4 @@ build:
 publish:
   stage: publish
   script:
-    - gradle publishToGitlab -i
-  only:
-    - develop
+    - gradle publishBinaryAndSourcesToGitlabRepository -i
