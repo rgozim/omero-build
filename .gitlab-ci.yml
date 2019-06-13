@@ -29,3 +29,4 @@ publish:
   stage: publish
   script:
     - gradle publishBinaryAndSourcesToGitlabRepository -i
+
