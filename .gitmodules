@@ -22,3 +22,6 @@
 	path = omero-blitz
 	url = https://github.com/rgozim/omero-blitz.git
 	branch = develop
+[submodule "omero-gateway-java"]
+	path = omero-gateway-java
+	url = https://github.com/rgozim/omero-gateway-java.git
