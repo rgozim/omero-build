@@ -6,6 +6,7 @@ includeBuild "omero-romio"
 includeBuild "omero-renderer"
 includeBuild "omero-server"
 includeBuild "omero-blitz"
+includeBuild "omero-gateway-java"
 
 // Replace buildscript in build.gradle
 gradle.rootProject {
